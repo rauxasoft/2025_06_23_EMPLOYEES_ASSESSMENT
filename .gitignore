@@ -1,0 +1,28 @@
+# Eclipse project files
+.settings/
+
+# Build output
+build/
+bin/
+
+# WebContent generated files (if any)
+WebContent/WEB-INF/classes/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Ignore node_modules or frontend builds if added later
+node_modules/
+dist/
+
+# Ignore IDE-specific folders
+.idea/
+.vscode/
+
+# Exclude lib jars only if not needed in repo (optional)
+# WebContent/WEB-INF/lib/*.jar
