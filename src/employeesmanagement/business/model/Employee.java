@@ -1,6 +1,6 @@
 package employeesmanagement.business.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 public class Employee {
@@ -9,13 +9,13 @@ public class Employee {
     private String name;
     private String email;
     private String phoneNumber;
-    private LocalDate dateOfJoining;
-	
+    private Date dateOfJoining;
+    
     public Employee() {
     	
     }
-    
-    public Employee(Long employeeId, String name, String email, String phoneNumber, LocalDate dateOfJoining) {
+	
+    public Employee(Long employeeId, String name, String email, String phoneNumber, Date dateOfJoining) {
 		this.employeeId = employeeId;
 		this.name = name;
 		this.email = email;
@@ -55,11 +55,11 @@ public class Employee {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public LocalDate getDateOfJoining() {
+	public Date getDateOfJoining() {
 		return dateOfJoining;
 	}
 
-	public void setDateOfJoining(LocalDate dateOfJoining) {
+	public void setDateOfJoining(Date dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
 

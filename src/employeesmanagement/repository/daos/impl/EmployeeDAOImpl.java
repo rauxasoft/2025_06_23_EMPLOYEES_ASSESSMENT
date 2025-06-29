@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,16 @@ import employeesmanagement.repository.exceptions.PersistenceException;
 import oracle.jdbc.OracleTypes;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
+
+	private static final EmployeeDAOImpl INSTANCE = new EmployeeDAOImpl();
+
+    private EmployeeDAOImpl() {
+        // private constructor for Singleton pattern
+    }
+
+    public static EmployeeDAOImpl getInstance() {
+        return INSTANCE;
+    }
 
 	@Override
 	public Long create(Employee employee) throws PersistenceException {
@@ -35,7 +46,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	        stmt.setString(2, employee.getName());
 	        stmt.setString(3, employee.getEmail());
 	        stmt.setString(4, employee.getPhoneNumber());
-	        stmt.setDate(5, java.sql.Date.valueOf(employee.getDateOfJoining()));
+	        stmt.setDate(5,  new java.sql.Date(employee.getDateOfJoining().getTime()));
+	        
+	  //      stmt.setDate(5, java.sql.Date.valueOf(employee.getDateOfJoining()));
 
 	        // 3️.- Ejecutar
 	        stmt.execute();
@@ -75,7 +88,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	                emp.setName(rs.getString("name"));
 	                emp.setEmail(rs.getString("email"));
 	                emp.setPhoneNumber(rs.getString("phone_number"));
-	                emp.setDateOfJoining(rs.getDate("date_of_joining").toLocalDate());
+	                emp.setDateOfJoining(new Date(rs.getDate("date_of_joining").getTime()));
 	                return Optional.of(emp);
 	            } else {
 	                return Optional.empty();
@@ -101,7 +114,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	        stmt.setString(2, employee.getName());
 	        stmt.setString(3, employee.getEmail());
 	        stmt.setString(4, employee.getPhoneNumber());
-	        stmt.setDate(5, java.sql.Date.valueOf(employee.getDateOfJoining()));
+	        stmt.setDate(5,  new java.sql.Date(employee.getDateOfJoining().getTime()));
+	 //       stmt.setDate(5, java.sql.Date.valueOf(employee.getDateOfJoining()));
 
 	        stmt.execute();
 
@@ -163,7 +177,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		             emp.setName(rs.getString("name"));
 		             emp.setEmail(rs.getString("email"));
 		             emp.setPhoneNumber(rs.getString("phone_number"));
-		             emp.setDateOfJoining(rs.getDate("date_of_joining").toLocalDate());
+		             emp.setDateOfJoining(new Date(rs.getDate("date_of_joining").getTime()));
+		       //    emp.setDateOfJoining(rs.getDate("date_of_joining").toLocalDate());
 		             employees.add(emp);
 		            }
 		        }

@@ -1,7 +1,7 @@
-package employeesmanagement.presentation.application.servlets;
+package employeesmanagement.presentation.application.controllers;
 
 import java.io.IOException;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,6 +17,7 @@ import employeesmanagement.business.services.EmployeeServices;
 public class EmployeeFormServlet extends HttpServlet {
 	  
 	private EmployeeServices employeeServices = null;
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -33,10 +34,11 @@ public class EmployeeFormServlet extends HttpServlet {
 		} else {
 			try {
 				Long employeeId = Long.valueOf(strEmployeeId);
-				Optional<Employee> optional = employeeServices.read(employeeId);
+				Employee employee = employeeServices.read(employeeId);
 				
-				if (optional.isPresent()) {
-					request.setAttribute("employee", optional.get());
+				if (employee != null) {
+					request.setAttribute("employee", employee);
+					request.setAttribute("dateOfJoining", sdf.format(employee.getDateOfJoining()));
 					request.setAttribute("accion", "edicion");
 				} else {
 					response.sendError(HttpServletResponse.SC_NOT_FOUND, "Empleado no encontrado");

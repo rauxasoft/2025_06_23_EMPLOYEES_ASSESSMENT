@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dwr>
+    <allow>
+    
+ 		<create creator="new" javascript="EmployeeServices">
+    		<param name="class" value="employeesmanagement.business.services.impl.EmployeeServicesImpl" />
+    		
+		</create>
+		
+		<!-- Enable bean marshalling for your model classes -->
+    	
+    	<convert converter="bean" match="employeesmanagement.business.model.Employee"/>
+    	<convert converter="bean" match="employeesmanagement.common.Page"/>
+		
+    </allow>
+</dwr>

@@ -5,8 +5,11 @@
 	<meta charset="UTF-8">
 	<title>Employees</title>
   	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/dwr/engine.js"></script>
+	<script src="${pageContext.request.contextPath}/dwr/util.js"></script>
+	<script src="${pageContext.request.contextPath}/dwr/interface/EmployeeServices.js"></script>
+	<script src="${pageContext.request.contextPath}/js/employee-list-dwr.js"></script>
   	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-  	
 </head>
 <body data-context-path="${pageContext.request.contextPath}">
 	<jsp:include page="nav.jsp"/>
@@ -17,8 +20,8 @@
     			<th data-sort="id">EmployeeID</th>
     			<th data-sort="name">Name</th>
     			<th data-sort="email">Email</th>
-    			<th data-sort="phone_number">Phone Number</th>
-    			<th data-sort="date_of_joining">Date of joining</th>
+    			<th data-sort="phone">Phone Number</th>
+    			<th data-sort="date">Date of joining</th>
       			<th>edit</th>
       			<th>delete</th>
     		</tr>
@@ -39,8 +42,6 @@
 	<br>
 	
 	<button id="prevBtn">« Previous</button> <span id="pageInfo"></span><button id="nextBtn">Next »</button>
-
-	<script src="${pageContext.request.contextPath}/js/employee-list.js"></script>
 	
 </body>
 </html>

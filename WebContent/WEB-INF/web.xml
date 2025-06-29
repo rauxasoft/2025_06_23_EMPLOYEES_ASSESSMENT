@@ -5,7 +5,7 @@
   
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+  </welcome-file-list> 
   
   <error-page>
     <error-code>404</error-code>
@@ -13,10 +13,27 @@
   </error-page>
   
   <resource-ref>
-    <description>Pool de conexiones a Oracle</description>
+  	<description>Pool de conexiones a Oracle</description>
     <res-ref-name>jdbc/EmployeeDB</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
-</resource-ref>
+  </resource-ref>
+  
+  <!-- DWR Servlet Configuration -->
+  
+  <servlet>
+  	<servlet-name>dwr-invoker</servlet-name>
+    <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+    <init-param>
+    	<param-name>debug</param-name>
+        <param-value>true</param-value> <!-- set false in production -->
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+   </servlet>
+   
+   <servlet-mapping>
+   		<servlet-name>dwr-invoker</servlet-name>
+    	<url-pattern>/dwr/*</url-pattern>
+   </servlet-mapping>
   
 </web-app>

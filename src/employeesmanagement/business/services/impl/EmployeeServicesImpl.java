@@ -1,7 +1,6 @@
 package employeesmanagement.business.services.impl;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import employeesmanagement.business.exceptions.BusinessException;
@@ -9,15 +8,21 @@ import employeesmanagement.business.model.Employee;
 import employeesmanagement.business.services.EmployeeServices;
 import employeesmanagement.common.Page;
 import employeesmanagement.repository.daos.EmployeeDAO;
+import employeesmanagement.repository.daos.impl.EmployeeDAOImpl;
 import employeesmanagement.repository.exceptions.PersistenceException;
 
 public class EmployeeServicesImpl implements EmployeeServices{
 
 	private EmployeeDAO employeeDAO;
 	
-	public void setEmployeeDAO(EmployeeDAO employeeDAO) {
-		this.employeeDAO = employeeDAO;
-	}
+	public EmployeeServicesImpl() {
+        
+		// This is for DWR: automatically initializes the DAO if it is null
+        
+		if (this.employeeDAO == null) {
+            this.employeeDAO = EmployeeDAOImpl.getInstance();
+        }
+    }
 	
 	@Override
 	public Long create(Employee employee) {
@@ -42,12 +47,15 @@ public class EmployeeServicesImpl implements EmployeeServices{
 		
 		return id;
 	}
-
+	
 	@Override
-	public Optional<Employee> read(Long employeeId) {
-		return employeeDAO.findById(employeeId);
+	public Employee read(Long employeeId) {
+		
+		boolean exists = employeeDAO.existsById(employeeId);
+		
+		return exists ? employeeDAO.findById(employeeId).get() : null;
 	}
-
+		
 	@Override
 	public void update(Employee employee) {
 		
@@ -80,9 +88,9 @@ public class EmployeeServicesImpl implements EmployeeServices{
 		}
 		
 	}
-
+	
 	@Override
-	public void delete(Long employeeId) {
+	public void remove(Long employeeId) {
 		
 		boolean exists = employeeDAO.existsById(employeeId);
 		
@@ -91,8 +99,9 @@ public class EmployeeServicesImpl implements EmployeeServices{
 		}
 		
 		employeeDAO.delete(employeeId);
+		
 	}
-
+	
 	@Override
 	public Page<Employee> getPage(int pageNumber, int pageSize, String sortedField, boolean ascending) {
 		return employeeDAO.findPage(pageNumber, pageSize, sortedField, ascending);

@@ -4,7 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Employee Form</title>
-  	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/dwr/engine.js"></script>
+    <script src="${pageContext.request.contextPath}/dwr/util.js"></script>
+    <script src="${pageContext.request.contextPath}/dwr/interface/EmployeeServices.js"></script>
+    <script src="${pageContext.request.contextPath}/js/employee-form-dwr.js"></script>
   	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body data-context-path="${pageContext.request.contextPath}">
@@ -28,13 +32,13 @@
 	    <input type="text" id="phone" value="${employee.phoneNumber}"><br>
 
 	    <label>Date of joining:</label><br>
-	    <input type="date" id="date" value="${employee.dateOfJoining}"><br><br>
+	    <input type="date" id="date" value="${dateOfJoining}"><br><br>
 
 	    <button type="submit" id="submitBtn">Send</button>
   	</form>
 
 	<p id="message"></p>
 
-	<script src="${pageContext.request.contextPath}/js/employee-form.js"></script>
+	
 </body>
 </html>
